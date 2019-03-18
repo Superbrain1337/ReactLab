@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReactLabRemake.Model;
 
 namespace ReactLabRemake
 {
@@ -27,6 +29,8 @@ namespace ReactLabRemake
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            string cs = Configuration.GetConnectionString("The_Right_String");
+            services.AddDbContext<TheContext>(options => options.UseSqlServer(cs));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
